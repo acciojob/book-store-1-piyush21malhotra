@@ -59,7 +59,14 @@ public class BookController {
     // getBookById()
     @GetMapping("/get-book-by-id/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable int id){
-        return new ResponseEntity<>(bookList.get(id), HttpStatus.CREATED);
+        Book newBook = null;
+        for(Book book : bookList) {
+            if (book.getId() == id) {
+                 newBook = book;
+                 break;
+            }
+        }
+        return new ResponseEntity<>(newBook, HttpStatus.CREATED);
     }
 
     // get request /get-all-books
